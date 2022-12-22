@@ -20,5 +20,5 @@ public interface StudentService {
 
     Collection<Student> findByAgeBetween(Long minAge, Long maxAge);
 
-    Collection<Faculty> getFacultyByStudent(long id);
+    Faculty getFacultyByStudent(long id);
 }

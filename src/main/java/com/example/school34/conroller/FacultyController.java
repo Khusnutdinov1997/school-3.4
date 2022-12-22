@@ -37,7 +37,7 @@ public class FacultyController {
     public ResponseEntity<Faculty> editFaculty(@RequestBody Faculty faculty, @PathVariable Long id) {
         Faculty foundFaculty = facultyService.editFaculty(id, faculty);
         if (foundFaculty == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(foundFaculty);
     }
@@ -54,7 +54,7 @@ public class FacultyController {
     }
 
     @GetMapping(params = "nameOrColor")
-    public Collection<Faculty> findByNameIgnorCaseOrColorIgnorCase(@RequestParam(required = false) String nameOrColor){
+    public Collection<Faculty> findByNameIgnoreCaseOrColorIgnoreCase(@RequestParam String nameOrColor){
         return facultyService.findByNameIgnoreCaseOrColorIgnoreCase(nameOrColor);
     }
 

@@ -13,9 +13,6 @@ public class Faculty {
     private String name;
     private String color;
 
-    @OneToMany(mappedBy = "faculty")
-    private Collection<Student> student;
-
     public Faculty() {
     }
 

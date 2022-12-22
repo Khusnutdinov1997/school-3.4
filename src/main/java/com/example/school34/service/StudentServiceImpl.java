@@ -6,7 +6,6 @@ import com.example.school34.repositories.FacultyRepository;
 import com.example.school34.repositories.StudentRepository;
 import org.springframework.stereotype.Service;
 
-import javax.swing.plaf.PanelUI;
 import java.util.Collection;
 
 
@@ -29,7 +28,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Student findStudent(long id) {
-        return studentRepository.findById(id).get();
+        return studentRepository.findById(id).orElse(null);
     }
 
     @Override
@@ -56,7 +55,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Collection<Faculty> getFacultyByStudent(long id){
+    public Faculty getFacultyByStudent(long id){
        return facultyRepository.findAllByStudent_id(id);
     }
 }
