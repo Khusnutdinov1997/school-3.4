@@ -58,8 +58,8 @@ public class FacultyController {
         return facultyService.findByNameIgnoreCaseOrColorIgnoreCase(nameOrColor);
     }
 
-    @GetMapping("/{id}/student")
-    public Collection<Student> getStudentByFaculty(@PathVariable long id) {
-        return facultyService.getStudentByFaculty(id);
+    @GetMapping("/students/{id}")
+    public ResponseEntity<Collection<Student>> getFacultyStudents(@PathVariable Long id) {
+        return ResponseEntity.ok(facultyService.getFacultyStudents(id));
     }
 }

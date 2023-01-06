@@ -1,12 +1,19 @@
 package com.example.school34.service;
 
+import com.example.school34.model.Avatar;
 import com.example.school34.model.Faculty;
 import com.example.school34.model.Student;
 import com.example.school34.repositories.FacultyRepository;
 import com.example.school34.repositories.StudentRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Collection;
+
+import static java.nio.file.StandardOpenOption.CREATE_NEW;
 
 
 @Service
@@ -54,8 +61,12 @@ public class StudentServiceImpl implements StudentService {
         return studentRepository.findByAgeBetween(minAge, maxAge);
     }
 
-    @Override
-    public Faculty getFacultyByStudent(long id){
-       return facultyRepository.findAllByStudent_id(id);
+    public Faculty getStudentFaculty(long id) {
+        Student student = findStudent(id);
+        if (student == null) {
+            return null;
+        }
+        return student.getFaculty();
     }
+
 }

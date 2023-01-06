@@ -2,11 +2,15 @@ package com.example.school34.conroller;
 
 import com.example.school34.model.Faculty;
 import com.example.school34.model.Student;
+import com.example.school34.service.AvatarServiceImp;
 import com.example.school34.service.StudentService;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Collection;
 
 @RestController
@@ -59,8 +63,9 @@ public class StudentController {
         return studentService.findByAgeBetween(minAge, maxAge);
     }
 
-    @GetMapping("/{id}/faculty")
-    public Faculty getFacultyByStudent(@PathVariable long id) {
-        return studentService.getFacultyByStudent(id);
+    @GetMapping("/faculty/{id}")
+    public ResponseEntity<Faculty> getStudentFaculty(@PathVariable Long id) {
+        return ResponseEntity.ok(studentService.getStudentFaculty(id));
     }
+
 }
