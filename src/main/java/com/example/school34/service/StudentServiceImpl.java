@@ -1,19 +1,13 @@
 package com.example.school34.service;
 
-import com.example.school34.model.Avatar;
 import com.example.school34.model.Faculty;
 import com.example.school34.model.Student;
 import com.example.school34.repositories.FacultyRepository;
 import com.example.school34.repositories.StudentRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Collection;
-
-import static java.nio.file.StandardOpenOption.CREATE_NEW;
+import java.util.List;
 
 
 @Service
@@ -67,6 +61,18 @@ public class StudentServiceImpl implements StudentService {
             return null;
         }
         return student.getFaculty();
+    }
+
+    public Long getAmountOfAllStudents() {
+        return studentRepository.getAmountOfAllStudents();
+    }
+
+    public Double getAverageAgeOfAllStudents() {
+        return studentRepository.getAverageAgeOfAllStudents();
+    }
+
+    public List<Student> getLastFiveStudents() {
+        return studentRepository.getLastFiveStudents();
     }
 
 }

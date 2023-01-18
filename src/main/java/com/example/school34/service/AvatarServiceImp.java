@@ -4,7 +4,10 @@ import com.example.school34.model.Avatar;
 import com.example.school34.model.Student;
 import com.example.school34.repositories.AvatarRepository;
 import com.example.school34.repositories.StudentRepository;
+
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -15,6 +18,8 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Collection;
+
 
 import static java.nio.file.StandardOpenOption.CREATE_NEW;
 
@@ -24,6 +29,7 @@ public class AvatarServiceImp {
 
     private final AvatarRepository avatarRepository;
     private final StudentRepository studentRepository;
+
     @Value("${path.to.avatars.folder}")
     private String avatarsDir;
 
@@ -81,5 +87,16 @@ public class AvatarServiceImp {
     }
     private String getExtensions(String fileName) {
         return fileName.substring(fileName.lastIndexOf(".") + 1);
+    }
+
+    public ResponseEntity<Collection<Avatar>> getAll(Integer pageNumber, Integer pageSize) {
+
+        PageRequest pageRequest = PageRequest.of(pageNumber - 1, pageSize);
+        Collection<Avatar> avatarList = avatarRepository.findAll(pageRequest).getContent();
+        if (avatarList.isEmpty()){
+
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(avatarList);
     }
 }

@@ -3,7 +3,7 @@ package com.example.school34.conroller;
 import com.example.school34.model.Faculty;
 import com.example.school34.model.Student;
 import com.example.school34.service.FacultyService;
-import org.springframework.http.HttpStatus;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
